@@ -1,0 +1,48 @@
+/* Define color variables for the default (light) theme */
+:root {
+  --background-color: #e0ddae;
+  --primary-color: #336467;
+  --accent-color: #d7340b;
+  --text-color: #333333;
+  --card-bg-color: #fdfcf7;
+  --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  --input-border-color: #ccc;
+}
+
+/* Define color variables for the dark theme */
+[data-theme='dark'] {
+  --background-color: #1a1a1a;
+  --primary-color: #5a9a9d;
+  --accent-color: #e57373;
+  --text-color: #e0ddae;
+  --card-bg-color: #2c2c2c;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  --input-border-color: #555;
+}
+
+/* Apply base styles */
+body {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12pt;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Remove default button styling and apply consistent font */
+button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12pt;
+}
+
+/* Basic anchor tag styling */
+a {
+  color: var(--accent-color);
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+

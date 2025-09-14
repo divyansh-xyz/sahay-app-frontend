@@ -38,7 +38,12 @@ function App() {
 
   // The style object for the toggle has been moved into the ThemeToggle component.
 
-  if (loading) return <SplashScreen />;
+  if (loading) {
+    console.log("App: Loading SplashScreen");
+    return <SplashScreen />;
+  }
+
+  console.log("App: Rendering main app, isLoggedIn:", isLoggedIn, "authPage:", authPage, "showOtp:", showOtp);
 
   return (
     <div className="App">
@@ -50,15 +55,18 @@ function App() {
       ) : (
         <>
           {showOtp ? (
+            console.log("App: Rendering OtpPage"),
             <OtpPage isDarkMode={isDarkMode} onSuccessfulVerification={handleLogin} />
           ) : authPage === 'signin' ? (
+            console.log("App: Rendering SignInPage"),
             <SignInPage isDarkMode={isDarkMode} onSwitchToSignUp={switchToSignUp} onSuccessfulLogin={handleLogin} />
           ) : (
-            <SignUpPage 
-              isDarkMode={isDarkMode} 
-              quote={quote} 
+            console.log("App: Rendering SignUpPage"),
+            <SignUpPage
+              isDarkMode={isDarkMode}
+              quote={quote}
               onContinue={handleContinueToOtp}
-              onSwitchToSignIn={switchToSignIn} 
+              onSwitchToSignIn={switchToSignIn}
             />
           )}
         </>

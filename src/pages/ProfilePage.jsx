@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // --- FIX: Using correct relative import path ---
-import ResetPopup from '../ResetPopup.jsx';
+import ResetPopup from '../components/ResetPopup.jsx';
 
 const dummyGraphData = [
   { question: 'Q1: Mood', value: 7 }, { question: 'Q2: Sleep', value: 5 },

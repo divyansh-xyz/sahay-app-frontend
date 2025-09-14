@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // --- FIX: Using correct relative import path ---
-import ResetPopup from '../components/ResetPopup.jsx';
+import ResetPopup from '../components/ResetPopup';
 
 const dummyGraphData = [
   { question: 'Q1: Mood', value: 7 }, { question: 'Q2: Sleep', value: 5 },
@@ -10,10 +10,13 @@ const dummyGraphData = [
 
 const ProfilePage = () => {
   const [showResetPopup, setShowResetPopup] = useState(false);
+  console.log("ProfilePage rendered, showResetPopup:", showResetPopup);
 
   const handleResetProgress = () => {
+    console.log("handleResetProgress called");
     console.log("Calling API to reset user progress...");
     setShowResetPopup(false);
+    console.log("showResetPopup set to false");
   };
   
   const styles = {
@@ -48,7 +51,7 @@ const ProfilePage = () => {
       </div>
       
       <div style={styles.section}>
-        <button style={styles.resetButton} onClick={() => setShowResetPopup(true)}>
+        <button style={styles.resetButton} onClick={() => { console.log("Reset button clicked"); setShowResetPopup(true); }}>
             <svg style={styles.icon} viewBox="0 0 24 24"><path d="M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M12,18C8.69,18 6,15.31 6,12C6,8.69 8.69,6 12,6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M12.5,8H11V13L15.25,15.5L16,14.25L12.5,12.25V8Z" /></svg>
             Reset Your Progress
         </button>

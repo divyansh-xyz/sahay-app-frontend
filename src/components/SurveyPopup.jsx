@@ -1,6 +1,7 @@
 import React from 'react';
 
-const SurveyPopup = ({ onAccept, onDecline }) => {
+// This component accepts the `isDarkMode` status to correctly style its buttons
+const SurveyPopup = ({ onAccept, onDecline, isDarkMode }) => {
   const styles = {
     overlay: {
       position: 'fixed',
@@ -8,7 +9,7 @@ const SurveyPopup = ({ onAccept, onDecline }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -16,62 +17,56 @@ const SurveyPopup = ({ onAccept, onDecline }) => {
     },
     popup: {
       backgroundColor: 'var(--card-bg-color)',
-      padding: '30px',
+      padding: '30px 40px',
       borderRadius: '12px',
-      boxShadow: 'var(--card-shadow)',
-      maxWidth: '400px',
-      width: '90%',
+      boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
       textAlign: 'center',
+      width: '100%',
+      maxWidth: '400px',
+      // Ensures all text inside the pop-up uses the correct theme color
+      color: 'var(--text-color)',
     },
     title: {
       color: 'var(--primary-color)',
-      marginBottom: '15px',
-      fontSize: '1.5em',
-    },
-    message: {
-      color: 'var(--text-color)',
       marginBottom: '25px',
-      lineHeight: '1.5',
+      fontSize: '1.4em',
+      lineHeight: '1.4',
     },
     buttonContainer: {
       display: 'flex',
-      gap: '15px',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
+      marginTop: '20px',
+    },
+    button: {
+      padding: '10px 25px',
+      border: 'none',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      fontSize: '1em',
+      fontFamily: "'Times New Roman', Times, serif",
     },
     acceptButton: {
-      padding: '10px 20px',
-      backgroundColor: 'var(--accent-color)',
-      color: 'white',
-      border: 'none',
-      borderRadius: '5px',
-      cursor: 'pointer',
-      fontSize: '1em',
+      backgroundColor: 'var(--primary-color)',
+      // Text color inverts correctly in dark mode for readability
+      color: isDarkMode ? 'var(--background-color)' : 'white',
     },
     declineButton: {
-      padding: '10px 20px',
       backgroundColor: 'transparent',
-      color: 'var(--text-color)',
-      border: `1px solid var(--input-border-color)`,
-      borderRadius: '5px',
-      cursor: 'pointer',
-      fontSize: '1em',
+      color: 'var(--accent-color)',
+      border: `1px solid var(--accent-color)`,
     },
   };
 
   return (
     <div style={styles.overlay}>
       <div style={styles.popup}>
-        <h2 style={styles.title}>Welcome to SAHAY!</h2>
-        <p style={styles.message}>
-          Would you like to take a quick survey to help us understand your current emotional state?
-          This will help us provide better support and resources.
-        </p>
+        <h2 style={styles.title}>Wanna answer a quick questionnaire and assess your mental health?</h2>
         <div style={styles.buttonContainer}>
-          <button style={styles.acceptButton} onClick={onAccept}>
-            Take Survey
+          <button style={{...styles.button, ...styles.declineButton}} onClick={onDecline}>
+            Let's do it later
           </button>
-          <button style={styles.declineButton} onClick={onDecline}>
-            Skip for Now
+          <button style={{...styles.button, ...styles.acceptButton}} onClick={onAccept}>
+            Sure!
           </button>
         </div>
       </div>

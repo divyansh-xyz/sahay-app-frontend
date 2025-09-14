@@ -1,48 +1,57 @@
-/* Define color variables for the default (light) theme */
+/* --- STEP 1: Import the new fonts from Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Poppins:wght@400;700&display=swap');
+
+/* --- Color variables remain the same --- */
 :root {
-  --background-color: #e0ddae;
-  --primary-color: #336467;
-  --accent-color: #d7340b;
-  --text-color: #333333;
-  --card-bg-color: #fdfcf7;
-  --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  --input-border-color: #ccc;
+  --background-color: #f5e4c8;
+  --primary-color: #7eacb5;
+  --accent-color: #1b242a;
+  --text-color: #1b242a;
+  --card-bg-color: #ffffff;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --input-border-color: #d1d5db;
 }
 
-/* Define color variables for the dark theme */
 [data-theme='dark'] {
-  --background-color: #1a1a1a;
-  --primary-color: #5a9a9d;
-  --accent-color: #e57373;
-  --text-color: #e0ddae;
-  --card-bg-color: #2c2c2c;
-  --card-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  --background-color: #1b242a;
+  --primary-color: #7eacb5;
+  --accent-color: #f5e4c8;
+  --text-color: #f5e4c8;
+  --card-bg-color: #2a343b;
+  --card-shadow: 0 4px 15px rgba(0,0,0,0.2);
   --input-border-color: #555;
 }
 
-/* Apply base styles */
+/* --- STEP 2: Apply the new fonts --- */
 body {
   margin: 0;
-  font-family: 'Times New Roman', Times, serif;
+  /* Poppins is now the default font for all body text */
+  font-family: 'Poppins', sans-serif; 
   font-size: 12pt;
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Remove default button styling and apply consistent font */
-button {
-  font-family: 'Times New Roman', Times, serif;
+/* New rule to apply Nunito specifically to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito', sans-serif;
+}
+
+button, input {
+  /* Ensure buttons and inputs also use the Poppins font */
+  font-family: 'Poppins', sans-serif;
   font-size: 12pt;
 }
 
-/* Basic anchor tag styling */
+/* Base anchor tag styling */
 a {
-  color: var(--accent-color);
+  color: var(--primary-color);
   cursor: pointer;
   text-decoration: none;
+  transition: color 0.3s;
 }
 a:hover {
   text-decoration: underline;
+  color: var(--accent-color);
 }
-

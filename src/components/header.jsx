@@ -1,10 +1,10 @@
 import React from 'react';
 
-// The component now accepts the `activePage` prop to know which link to highlight
-const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
+// The component now accepts `isDarkMode` to handle text color inversion
+const Header = ({ onNavClick, onHelplinesClick, activePage, isDarkMode }) => {
   const styles = {
     headerContainer: {
-      position: 'fixed', // This keeps the header at the top of the screen when scrolling
+      position: 'fixed',
       top: 0,
       left: 0,
       width: '100%',
@@ -36,17 +36,17 @@ const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
       textDecoration: 'none',
       fontSize: '12pt',
       transition: 'color 0.3s, border-bottom 0.3s',
-      paddingBottom: '5px', // Space for the line
-      borderBottom: '2px solid transparent', // Prevents content jump on hover/active
+      paddingBottom: '5px',
+      borderBottom: '2px solid transparent',
     },
-    // This is the new style for the currently active navigation link
     activeNavLink: {
       cursor: 'pointer',
       fontSize: '12pt',
       transition: 'color 0.3s, border-bottom 0.3s',
       paddingBottom: '5px',
-      color: 'var(--primary-color)', // Highlighted text color
-      borderBottom: `2px solid var(--accent-color)`, // The visible red line
+      color: 'var(--primary-color)',
+      fontWeight: 'bold',
+      borderBottom: `2px solid var(--accent-color)`,
     },
     actionsContainer: {
       display: 'flex',
@@ -56,18 +56,20 @@ const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
     helplinesButton: {
       cursor: 'pointer',
       padding: '8px 15px',
-      backgroundColor: 'transparent',
+      backgroundColor: 'var(--accent-color)',
+      // Text color inverts correctly in dark mode
+      color: isDarkMode ? 'var(--background-color)' : 'white', 
       border: '1px solid var(--accent-color)',
-      color: 'var(--accent-color)',
       borderRadius: '20px',
       fontSize: '11pt',
       transition: 'background-color 0.3s, color 0.3s',
     },
   };
 
+  // The hover handler now also accounts for dark mode when inverting colors
   const handleButtonHover = (e, isOver) => {
-    e.target.style.backgroundColor = isOver ? 'var(--accent-color)' : 'transparent';
-    e.target.style.color = isOver ? 'white' : 'var(--accent-color)';
+    e.target.style.backgroundColor = isOver ? 'transparent' : 'var(--accent-color)';
+    e.target.style.color = isOver ? 'var(--accent-color)' : (isDarkMode ? 'var(--background-color)' : 'white');
   };
 
   return (
@@ -75,7 +77,6 @@ const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
       <div style={styles.companyName}>SAHAY</div>
       
       <nav style={styles.navLinks}>
-        {/* Each link now checks if it's the active page and applies the correct style */}
         <a style={activePage === 'home' ? styles.activeNavLink : styles.navLink} onClick={() => onNavClick('home')}>Home</a>
         <a style={activePage === 'library' ? styles.activeNavLink : styles.navLink} onClick={() => onNavClick('library')}>Library</a>
         <a style={activePage === 'profile' ? styles.activeNavLink : styles.navLink} onClick={() => onNavClick('profile')}>Profile</a>
@@ -90,7 +91,7 @@ const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
         >
           National Helplines
         </button>
-        {/* This spacer provides room for the fixed-position theme toggle */}
+        {/* Spacer for the theme toggle */}
         <div style={{width: '60px'}}></div>
       </div>
     </header>
@@ -98,4 +99,3 @@ const Header = ({ onNavClick, onHelplinesClick, activePage }) => {
 };
 
 export default Header;
-

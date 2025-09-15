@@ -1,79 +1,79 @@
 import React, { useState } from 'react';
 
-// Using correct relative paths for all imports
-import Header from '../components/Header.jsx';
-import HappinessMeter from '../components/HappinessMeter.jsx';
-import SurveyPopup from '../components/SurveyPopup.jsx';
-import HelplinesModal from '../components/HelplinesModal.jsx';
-import Footer from '../components/Footer.jsx';
-import HomePage from './HomePage.jsx';
-import LibraryPage from './LibraryPage.jsx';
-import ProfilePage from './ProfilePage.jsx';
-import QuestionnairePage from './QuestionnairePage.jsx';
+// --- FIX: Using absolute paths from the project's 'src' root for reliability ---
+import Header from '/src/components/Header.jsx';
+import SurveyPopup from '/src/components/SurveyPopup.jsx';
+import HelplinesModal from '/src/components/HelplinesModal.jsx';
+import Footer from '/src/components/Footer.jsx';
+import HomePage from '/src/pages/HomePage.jsx';
+import LibraryPage from '/src/pages/LibraryPage.jsx';
+import ProfilePage from '/src/pages/ProfilePage.jsx';
+import QuestionnairePage from '/src/pages/QuestionnairePage.jsx';
 
-// This component receives the isDarkMode status from App.jsx
 const MainLayout = ({ isDarkMode }) => {
-  const [currentPage, setCurrentPage] = useState('home');
+  // Default page is now 'dashboard' to match the new header
+  const [currentPage, setCurrentPage] = useState('dashboard');
   const [showSurveyPopup, setShowSurveyPopup] = useState(true);
   const [showHelplinesModal, setShowHelplinesModal] = useState(false);
-  const [hasTakenSurvey, setHasTakenSurvey] = useState(false);
+  const [hasTakenSurvey, setHasTakenSurvey] = useState(false); // This can be used later
 
   // --- Event Handlers ---
   const handleNavClick = (page) => setCurrentPage(page);
   const handleAcceptSurvey = () => { setShowSurveyPopup(false); setCurrentPage('questionnaire'); };
   const handleDeclineSurvey = () => setShowSurveyPopup(false);
-  const handleTakeNewSurvey = () => setCurrentPage('questionnaire');
-  const handleSurveyComplete = () => { setHasTakenSurvey(true); setCurrentPage('home'); };
+  
+  // This function is now passed to HomePage for the "Start Wellness Assessment" button
+  const handleStartAssessment = () => {
+    setCurrentPage('questionnaire');
+  }
+
+  // This function is for when the questionnaire is eventually completed
+  const handleSurveyComplete = () => { 
+    setHasTakenSurvey(true); 
+    setCurrentPage('dashboard'); // Go back to the dashboard after the survey
+  };
 
   const styles = {
-    mainContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
+    mainContainer: { 
+      display: 'flex', 
+      flexDirection: 'column', 
+      minHeight: '100vh' 
     },
-    contentArea: {
-      flex: 1, // This allows the content to fill the space and push the footer down
-      padding: '20px',
-      // 80px of top padding prevents content from being hidden by the fixed header/meter
-      paddingTop: '80px', 
+    contentArea: { 
+      flex: 1, 
+      paddingTop: '65px' // Provides space for the fixed header
     },
   };
 
-  // This function decides which main page to render based on the current state
+  // This function renders the correct page based on the current state
   const renderCurrentPage = () => {
     switch (currentPage) {
-      case 'home': 
-        return <HomePage />;
+      case 'dashboard': 
+        return <HomePage onStartAssessment={handleStartAssessment} />;
       case 'library': 
         return <LibraryPage />;
-      case 'profile': 
-        // Passes the dark mode status down to the ProfilePage
+      case 'progress': 
         return <ProfilePage isDarkMode={isDarkMode} />;
       case 'questionnaire': 
         return <QuestionnairePage onComplete={handleSurveyComplete} />;
       default: 
-        return <HomePage />;
+        return <HomePage onStartAssessment={handleStartAssessment} />;
     }
   };
 
   return (
     <div style={styles.mainContainer}>
-      {/* Pop-ups and Modals */}
-      {showSurveyPopup && <SurveyPopup 
-        onAccept={handleAcceptSurvey} 
-        onDecline={handleDeclineSurvey} 
-        isDarkMode={isDarkMode} // Passes the dark mode status to the SurveyPopup
-      />}
+      {showSurveyPopup && <SurveyPopup onAccept={handleAcceptSurvey} onDecline={handleDeclineSurvey} isDarkMode={isDarkMode} />}
       {showHelplinesModal && <HelplinesModal onClose={() => setShowHelplinesModal(false)} />}
       
-      {/* Main Persistent UI */}
       <Header 
         onNavClick={handleNavClick} 
         onHelplinesClick={() => setShowHelplinesModal(true)}
         activePage={currentPage}
-        isDarkMode={isDarkMode} // Passes the dark mode status to the Header
+        isDarkMode={isDarkMode}
       />
-      <HappinessMeter hasTakenSurvey={hasTakenSurvey} onTakeNewSurvey={handleTakeNewSurvey} />
+
+      {/* The old HappinessMeter component is now completely removed */}
 
       <main style={styles.contentArea}>
         {renderCurrentPage()}

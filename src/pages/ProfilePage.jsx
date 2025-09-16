@@ -29,11 +29,22 @@ const ProfilePage = () => {
     { name: "Score", value: 91, fill: "url(#wellnessGradient)" },
   ];
   const happinessData = [
-    { week: "Week 1", happiness: 59 },
-    { week: "Week 2", happiness: 70 },
-    { week: "Week 3", happiness: 84 },
+    { week: "Week 1", happiness: 70 },
+    { week: "Week 2", happiness: 75 },
+    { week: "Week 3", happiness: 78 },
     { week: "Week 4", happiness: 91 },
   ];
+
+  // Function to get wellness status and color
+  const getWellnessStatus = (score) => {
+    if (score >= 80) {
+      return { text: "Safe", color: "#22c55e", };
+    } else if (score >= 40) {
+      return { text: "Vulnerable", color: "#eab308" };
+    } else {
+      return { text: "At Risk", color: "#ef4444" };
+    }
+  };
 
   const styles = {
     container: {
@@ -95,12 +106,26 @@ const ProfilePage = () => {
       color: "var(--text-color)",
       textAlign: "center",
     },
+    wellnessStatus: {
+      position: "absolute",
+      top: "65%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      fontSize: "18px",
+      fontWeight: "600",
+      textAlign: "center",
+    },
   };
 
   return (
     <div style={styles.container}>
       {/* Theme Toggle Button */}
-     ls
+      <button 
+        style={styles.toggleButton}
+        onClick={() => setIsDarkMode(!isDarkMode)}
+      >
+        {isDarkMode ? "Light Mode" : "Dark Mode"}
+      </button>
 
       {/* Page Title */}
       <h1 style={styles.title}>Your Wellness Profile</h1>
@@ -135,6 +160,9 @@ const ProfilePage = () => {
             </ResponsiveContainer>
             <div style={styles.wellnessText}>
               {wellnessData[0].value}%
+            </div>
+            <div style={{...styles.wellnessStatus, color: getWellnessStatus(wellnessData[0].value).color}}>
+              {getWellnessStatus(wellnessData[0].value).text}
             </div>
           </div>
         </div>
@@ -182,7 +210,7 @@ const ProfilePage = () => {
       {/* Schedule Section */}
       <div style={styles.section}>
         <h2 style={styles.sectionTitle}>Schedule</h2>
-        <p>AI will give this</p>
+        <p>The AI will generate a personalized schedule based on the student’s tier — Safe, Vulnerable, or At-Risk based on our Library.</p>
       </div>
     </div>
   );

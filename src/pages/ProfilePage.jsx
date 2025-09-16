@@ -120,12 +120,7 @@ const ProfilePage = () => {
   return (
     <div style={styles.container}>
       {/* Theme Toggle Button */}
-      <button 
-        style={styles.toggleButton}
-        onClick={() => setIsDarkMode(!isDarkMode)}
-      >
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      
 
       {/* Page Title */}
       <h1 style={styles.title}>Your Wellness Profile</h1>

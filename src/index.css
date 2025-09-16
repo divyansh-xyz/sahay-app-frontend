@@ -1,7 +1,6 @@
-/* --- STEP 1: Import the new fonts from Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Poppins:wght@400;700&display=swap');
 
-/* --- Color variables remain the same --- */
+/* --- Light Theme --- */
 :root {
   --background-color: #f5e4c8;
   --primary-color: #7eacb5;
@@ -10,8 +9,12 @@
   --card-bg-color: #ffffff;
   --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
   --input-border-color: #d1d5db;
+
+  /* --- ADDED: New color for the 'Share' button highlight --- */
+  --active-green: #28a745; 
 }
 
+/* --- Dark Theme --- */
 [data-theme='dark'] {
   --background-color: #1b242a;
   --primary-color: #7eacb5;
@@ -20,12 +23,14 @@
   --card-bg-color: #2a343b;
   --card-shadow: 0 4px 15px rgba(0,0,0,0.2);
   --input-border-color: #555;
+
+  /* --- ADDED: A slightly brighter green for better contrast in dark mode --- */
+  --active-green: #30c952;
 }
 
-/* --- STEP 2: Apply the new fonts --- */
+/* --- Base Styles --- */
 body {
   margin: 0;
-  /* Poppins is now the default font for all body text */
   font-family: 'Poppins', sans-serif; 
   font-size: 12pt;
   background-color: var(--background-color);
@@ -33,18 +38,15 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* New rule to apply Nunito specifically to headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Nunito', sans-serif;
 }
 
 button, input {
-  /* Ensure buttons and inputs also use the Poppins font */
   font-family: 'Poppins', sans-serif;
   font-size: 12pt;
 }
 
-/* Base anchor tag styling */
 a {
   color: var(--primary-color);
   cursor: pointer;

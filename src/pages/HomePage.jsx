@@ -1,19 +1,18 @@
 import React from 'react';
 
-// This component receives the function to start the questionnaire from MainLayout
 const HomePage = ({ onStartAssessment }) => {
   const styles = {
-    // --- Section 1: Hero Banner with Video ---
+    // --- Section 1: Hero Banner ---
     heroContainer: {
-      position: 'relative', // Anchor for the video and text overlay
-      height: '50vh', // Takes up half the viewport height
+      position: 'relative',
+      height: '40vh', // --- CHANGE: Reduced height from 50vh ---
       width: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'hidden', // Prevents video from spilling out
+      overflow: 'hidden',
       borderRadius: '20px',
-      marginBottom: '40px',
+      marginBottom: '25px', // --- CHANGE: Reduced margin ---
     },
     videoBackground: {
       position: 'absolute',
@@ -24,30 +23,28 @@ const HomePage = ({ onStartAssessment }) => {
       minHeight: '100%',
       width: 'auto',
       height: 'auto',
-      zIndex: 1, // Sits behind the text
-      filter: 'brightness(0.7)', // Slightly darkens the video for text readability
+      zIndex: 1,
+      filter: 'brightness(0.7)',
     },
     heroContent: {
       position: 'relative',
-      zIndex: 2, // Sits on top of the video
+      zIndex: 2,
       textAlign: 'center',
       color: 'white',
       textShadow: '0 2px 8px rgba(0,0,0,0.7)',
     },
     heroTitle: {
-      fontSize: '3.5em',
+      fontSize: '3em', // --- CHANGE: Reduced font size ---
       fontWeight: 'bold',
       margin: '0 0 10px 0',
       fontFamily: "'Nunito', sans-serif",
-      // --- The "Hollow Text" Effect ---
-      // This makes the video show through the text
       backgroundColor: 'white',
       color: 'black',
       mixBlendMode: 'screen',
     },
     heroTagline: {
       fontSize: '1.2em',
-      margin: '0 0 30px 0',
+      margin: '0 0 25px 0', // --- CHANGE: Reduced margin ---
       fontFamily: "'Poppins', sans-serif",
     },
     assessmentButton: {
@@ -69,36 +66,41 @@ const HomePage = ({ onStartAssessment }) => {
     // --- Section 2: Info Cards ---
     cardsContainer: {
       display: 'flex',
-      justifyContent: 'space-around',
+      justifyContent: 'center', // --- CHANGE: Centered the cards ---
       gap: '20px',
-      marginBottom: '40px',
+      marginBottom: '25px', // --- CHANGE: Reduced margin ---
+      maxWidth: '900px', // --- CHANGE: Constrained width to pull cards together ---
+      margin: '0 auto 25px auto', // --- CHANGE: Centered the container itself ---
     },
     card: {
       backgroundColor: 'var(--card-bg-color)',
-      padding: '25px',
+      padding: '20px', // --- CHANGE: Reduced padding ---
       borderRadius: '15px',
       boxShadow: 'var(--card-shadow)',
       textAlign: 'center',
       flex: 1,
     },
     cardNumber: {
-      fontSize: '2.5em',
+      fontSize: '2em', // --- CHANGE: Reduced font size ---
       fontWeight: 'bold',
       color: 'var(--primary-color)',
-      margin: '0 0 10px 0',
+      margin: '0 0 5px 0', // --- CHANGE: Reduced margin ---
     },
     cardText: {
       margin: 0,
       color: 'var(--text-color)',
       opacity: 0.8,
+      fontSize: '11pt', // --- CHANGE: Slightly smaller font size ---
     },
 
     // --- Section 3: AI Wellness Assistant ---
     assistantContainer: {
       backgroundColor: 'var(--card-bg-color)',
-      padding: '30px',
+      padding: '25px', // --- CHANGE: Reduced padding ---
       borderRadius: '15px',
       boxShadow: 'var(--card-shadow)',
+      maxWidth: '900px', // --- CHANGE: Matched width of cards container ---
+      margin: '0 auto', // --- CHANGE: Centered the container ---
     },
     assistantHeader: {
       display: 'flex',
@@ -150,12 +152,12 @@ const HomePage = ({ onStartAssessment }) => {
   }
 
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       {/* --- HERO SECTION --- */}
       <div style={styles.heroContainer}>
         <video 
           style={styles.videoBackground} 
-          src="/video.mp4" // Directly references the video in your 'public' folder
+          src="/video.mp4"
           autoPlay 
           loop 
           muted 
@@ -165,7 +167,7 @@ const HomePage = ({ onStartAssessment }) => {
           <p style={styles.heroTagline}>Your mental wellness companion for a healthier, happier you</p>
           <button 
             style={styles.assessmentButton}
-            onClick={onStartAssessment} // Connects to the function from MainLayout
+            onClick={onStartAssessment}
             onMouseOver={(e) => handleButtonHover(e, true)}
             onMouseOut={(e) => handleButtonHover(e, false)}
           >

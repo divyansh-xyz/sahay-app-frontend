@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-// --- FIX: Using absolute paths from the project's 'src' root for reliability ---
+// --- FIX: Using absolute paths from the project's 'src' root ---
+// This method avoids issues with relative paths ('../') and is a standard configuration
+// in modern React projects using build tools like Vite.
 import Header from '/src/components/Header.jsx';
 import SurveyPopup from '/src/components/SurveyPopup.jsx';
 import HelplinesModal from '/src/components/HelplinesModal.jsx';
@@ -9,28 +11,26 @@ import HomePage from '/src/pages/HomePage.jsx';
 import LibraryPage from '/src/pages/LibraryPage.jsx';
 import ProfilePage from '/src/pages/ProfilePage.jsx';
 import QuestionnairePage from '/src/pages/QuestionnairePage.jsx';
+import SharePage from '/src/pages/SharePage.jsx';
 
 const MainLayout = ({ isDarkMode }) => {
-  // Default page is now 'dashboard' to match the new header
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [showSurveyPopup, setShowSurveyPopup] = useState(true);
   const [showHelplinesModal, setShowHelplinesModal] = useState(false);
-  const [hasTakenSurvey, setHasTakenSurvey] = useState(false); // This can be used later
+  const [hasTakenSurvey, setHasTakenSurvey] = useState(false);
 
   // --- Event Handlers ---
   const handleNavClick = (page) => setCurrentPage(page);
   const handleAcceptSurvey = () => { setShowSurveyPopup(false); setCurrentPage('questionnaire'); };
   const handleDeclineSurvey = () => setShowSurveyPopup(false);
   
-  // This function is now passed to HomePage for the "Start Wellness Assessment" button
   const handleStartAssessment = () => {
     setCurrentPage('questionnaire');
   }
 
-  // This function is for when the questionnaire is eventually completed
   const handleSurveyComplete = () => { 
     setHasTakenSurvey(true); 
-    setCurrentPage('dashboard'); // Go back to the dashboard after the survey
+    setCurrentPage('dashboard');
   };
 
   const styles = {
@@ -56,6 +56,8 @@ const MainLayout = ({ isDarkMode }) => {
         return <ProfilePage isDarkMode={isDarkMode} />;
       case 'questionnaire': 
         return <QuestionnairePage onComplete={handleSurveyComplete} />;
+      case 'share':
+        return <SharePage />;
       default: 
         return <HomePage onStartAssessment={handleStartAssessment} />;
     }
@@ -73,7 +75,7 @@ const MainLayout = ({ isDarkMode }) => {
         isDarkMode={isDarkMode}
       />
 
-      {/* The old HappinessMeter component is now completely removed */}
+      {/* The HappinessMeter component has been removed */}
 
       <main style={styles.contentArea}>
         {renderCurrentPage()}

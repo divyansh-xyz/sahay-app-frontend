@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
-// --- FIX: Using absolute paths from the project's 'src' root ---
-// This method avoids issues with relative paths ('../') and is a standard configuration
-// in modern React projects using build tools like Vite.
-import Header from '/src/components/Header.jsx';
-import SurveyPopup from '/src/components/SurveyPopup.jsx';
-import HelplinesModal from '/src/components/HelplinesModal.jsx';
-import Footer from '/src/components/Footer.jsx';
-import HomePage from '/src/pages/HomePage.jsx';
-import LibraryPage from '/src/pages/LibraryPage.jsx';
-import ProfilePage from '/src/pages/ProfilePage.jsx';
-import QuestionnairePage from '/src/pages/QuestionnairePage.jsx';
-import SharePage from '/src/pages/SharePage.jsx';
+// --- FIX: Using relative paths from the current file location ---
+import Header from '../components/Header.jsx';
+import SurveyPopup from '../components/SurveyPopup.jsx';
+import HelplinesModal from '../components/HelplinesModal.jsx';
+import Footer from '../components/Footer.jsx';
+import HomePage from './HomePage.jsx';
+import LibraryPage from './LibraryPage.jsx';
+import ProfilePage from './ProfilePage.jsx';
+import QuestionnairePage from './QuestionnairePage.jsx';
+import SharePage from './SharePage.jsx';
 
 const MainLayout = ({ isDarkMode }) => {
   const [currentPage, setCurrentPage] = useState('dashboard');

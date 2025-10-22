@@ -74,7 +74,7 @@ const Header = ({ onNavClick, activePage, isDarkMode }) => {
 
   return (
     <header style={styles.headerContainer}>
-      <div style={styles.companyName}>Sahay</div>
+      <div style={styles.companyName}>SAHAY</div>
       
       <nav style={styles.navLinks}>
         {/* The active style for these links remains the primary color */}

@@ -163,7 +163,7 @@ const HomePage = ({ onStartAssessment }) => {
           muted 
         />
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Welcome to Sahay</h1>
+          <h1 style={styles.heroTitle}>Welcome to SAHAY</h1>
           <p style={styles.heroTagline}>Your mental wellness companion for a healthier, happier you</p>
           <button 
             style={styles.assessmentButton}
